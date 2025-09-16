@@ -11,12 +11,16 @@ module Formatter
       private
 
       def self.validate(phone_number)
-        raise StandardError, 'invalid' if phone_number.length < 11
+        raise Formatter::PhoneNumber::Errors::InvalidLengthError if phone_number.length < 11
       end
 
       def self.normalize(phone_number)
-        clean_phone_number = phone_number.strip.gsub(/\s/, '').gsub(/^(\+?44|0)/, '')
+        phone_number.strip.gsub(/\s/, '').gsub(/^(\+?44|0)/, '')
       end
+    end
+
+    module Errors
+      class InvalidLengthError < StandardError; end
     end
   end
 end

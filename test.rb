@@ -8,7 +8,7 @@ class PhoneNumberFormatterTest < Minitest::Test
   end
 
   def test_invalid_phone_nmber_format
-    assert_raises StandardError do
+    assert_raises Formatter::PhoneNumber::Errors::InvalidLengthError do
       Formatter::PhoneNumber::UK.format('0634343')
     end
   end
