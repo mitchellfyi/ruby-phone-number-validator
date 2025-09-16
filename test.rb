@@ -8,6 +8,9 @@ class PhoneNumberFormatterTest < Minitest::Test
 
     result = Formatter::PhoneNumber::UK.format(' 071 234 567 89 ')
     assert_equal '+447123456789', result
+
+    result = Formatter::PhoneNumber::UK.format("071234\t56789")
+    assert_equal '+447123456789', result
   end
 
   def test_normalized_and_valid_with_some_characters
@@ -52,6 +55,11 @@ class PhoneNumberFormatterTest < Minitest::Test
   def test_blank
     assert_raises Formatter::PhoneNumber::Errors::BlankError do
       Formatter::PhoneNumber::UK.format
+    end
+
+
+    assert_raises Formatter::PhoneNumber::Errors::BlankError do
+      Formatter::PhoneNumber::UK.format(nil)
     end
 
     assert_raises Formatter::PhoneNumber::Errors::BlankError do
