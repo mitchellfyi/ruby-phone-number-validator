@@ -10,6 +10,14 @@ class PhoneNumberFormatterTest < Minitest::Test
     assert_equal '+447123456789', result
   end
 
+  def test_normalized_and_valid_with_some_characters
+    result = Formatter::PhoneNumber::UK.format('071234-56789')
+    assert_equal '+447123456789', result
+
+    result = Formatter::PhoneNumber::UK.format('071234.56789')
+    assert_equal '+447123456789', result
+  end
+
   def test_valid_prefixes
     result = Formatter::PhoneNumber::UK.format('01234567890')
     assert_equal '+441234567890', result

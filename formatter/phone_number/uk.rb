@@ -13,14 +13,14 @@ module Formatter
       def self.validate(phone_number)
         raise Errors::BlankError, 'Phone number cannot be blank' if phone_number.nil? || phone_number == ''
 
-        raise Errors::InvalidCharacters, 'Phone number must contain numerical characters and "+" only' if phone_number.match(/[^0-9]/)
+        raise Errors::InvalidCharacters, 'Phone number must contain numbers only' if phone_number.match(/[^0-9]/)
 
         raise Errors::InvalidLengthError, 'Phone number is the incorrect length' if phone_number.length != 10
       end
 
       def self.normalize(phone_number)
         phone_number&.strip
-          &.gsub(/\s/, '')
+          &.gsub(/\s|\-|\./, '')
           &.gsub(/^(\+440|440|44|\+44|0)/, '')
       end
     end
