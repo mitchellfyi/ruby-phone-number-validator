@@ -12,4 +12,19 @@ class PhoneNumberFormatterTest < Minitest::Test
       Formatter::PhoneNumber::UK.format('0634343')
     end
   end
+
+  def test_blank
+    assert_raises Formatter::PhoneNumber::Errors::BlankError do
+      Formatter::PhoneNumber::UK.format
+    end
+
+    assert_raises Formatter::PhoneNumber::Errors::BlankError do
+      Formatter::PhoneNumber::UK.format('')
+    end
+
+    assert_raises Formatter::PhoneNumber::Errors::BlankError do
+      Formatter::PhoneNumber::UK.format(' ')
+    end
+  end
+  
 end
