@@ -26,5 +26,11 @@ class PhoneNumberFormatterTest < Minitest::Test
       Formatter::PhoneNumber::UK.format(' ')
     end
   end
+
+  def test_invalid_characters
+    assert_raises Formatter::PhoneNumber::Errors::InvalidCharacters do
+      Formatter::PhoneNumber::UK.format('+44712345678o')
+    end
+  end
   
 end
