@@ -15,7 +15,7 @@ module Formatter
 
         raise Errors::InvalidCharacters if phone_number.match(/[^0-9]/)
 
-        raise Errors::InvalidLengthError if phone_number.length < 10
+        raise Errors::InvalidLengthError if phone_number.length != 10
       end
 
       def self.normalize(phone_number)

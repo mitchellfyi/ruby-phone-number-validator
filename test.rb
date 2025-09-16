@@ -2,14 +2,25 @@ require 'minitest/autorun'
 require_relative 'formatter/phone_number/uk'
 
 class PhoneNumberFormatterTest < Minitest::Test
-  def test_valid_phone_number_format
+  def test_valid_with_spaces
     result = Formatter::PhoneNumber::UK.format('071234 56789')
+    assert_equal '+447123456789', result
+
+    result = Formatter::PhoneNumber::UK.format(' 071 234 567 89 ')
     assert_equal '+447123456789', result
   end
 
-  def test_invalid_phone_nmber_format
+  def test_invalid_length
     assert_raises Formatter::PhoneNumber::Errors::InvalidLengthError do
       Formatter::PhoneNumber::UK.format('0634343')
+    end
+
+    assert_raises Formatter::PhoneNumber::Errors::InvalidLengthError do
+      Formatter::PhoneNumber::UK.format('0123456789')
+    end
+
+    assert_raises Formatter::PhoneNumber::Errors::InvalidLengthError do
+      puts Formatter::PhoneNumber::UK.format('012345678901')
     end
   end
 
