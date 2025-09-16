@@ -21,7 +21,7 @@ module Formatter
       def self.normalize(phone_number)
         phone_number&.strip
           &.gsub(/\s/, '')
-          &.gsub(/^(\+?44|0)/, '')
+          &.gsub(/^(\+440|440|44|\+44|0)/, '')
       end
     end
 
