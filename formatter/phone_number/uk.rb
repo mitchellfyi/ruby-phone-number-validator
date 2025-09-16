@@ -11,11 +11,11 @@ module Formatter
       private
 
       def self.validate(phone_number)
-        raise Errors::BlankError if phone_number.nil? || phone_number == ''
+        raise Errors::BlankError, 'Phone number cannot be blank' if phone_number.nil? || phone_number == ''
 
-        raise Errors::InvalidCharacters if phone_number.match(/[^0-9]/)
+        raise Errors::InvalidCharacters, 'Phone number must contain numerical characters and "+" only' if phone_number.match(/[^0-9]/)
 
-        raise Errors::InvalidLengthError if phone_number.length != 10
+        raise Errors::InvalidLengthError, 'Phone number is the incorrect length' if phone_number.length != 10
       end
 
       def self.normalize(phone_number)

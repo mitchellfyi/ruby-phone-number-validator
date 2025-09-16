@@ -60,5 +60,4 @@ class PhoneNumberFormatterTest < Minitest::Test
       Formatter::PhoneNumber::UK.format('+44712345678o')
     end
   end
-  
 end
