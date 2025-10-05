@@ -1,13 +1,36 @@
+# UK Phone Number Formatter
+# 
+# This module provides functionality to format and validate UK phone numbers.
+# It handles various input formats and normalizes them to international format (+44...).
+#
+# Supported formats:
+# - Mobile numbers: 07xxxxxxxxx
+# - Landline numbers: 01xxxxxxxxx, 02xxxxxxxxx, etc.
+# - International format: +44xxxxxxxxx
+# - With various separators: spaces, dashes, dots, parentheses
+#
+# Example usage:
+#   Formatter::PhoneNumber::UK.format('07123 456789')  # => '+447123456789'
+#   Formatter::PhoneNumber::UK.format('+44 7123 456789')  # => '+447123456789'
+#
 module Formatter
   module PhoneNumber
     module UK
       COUNTRY_CODE = '+44'
       EXPECTED_LENGTH = 10
 
-      WHITESPACE_REGEX = (/\s|\-|\./).freeze
-      PREFIX_REGEX = (/^(\+440|440|44|\+44|0)/).freeze
-      INVALID_CHARS_REGEX = (/[^0-9]/).freeze
+      # Regex patterns for phone number processing
+      WHITESPACE_REGEX = /[\s\-\.\(\)]/.freeze
+      PREFIX_REGEX = /^(\+440|440|44|\+44|0)/.freeze
+      INVALID_CHARS_REGEX = /[^0-9]/.freeze
 
+      # Formats a UK phone number to international format (+44...)
+      #
+      # @param phone_number [String, Integer, nil] The phone number to format
+      # @return [String] The formatted phone number in international format
+      # @raise [Errors::BlankError] if phone number is blank or nil
+      # @raise [Errors::InvalidCharacters] if phone number contains non-numeric characters
+      # @raise [Errors::InvalidLengthError] if phone number is wrong length
       def self.format(phone_number = nil)
         normalized_phone_number = normalize(phone_number)
         validate(normalized_phone_number)
@@ -34,7 +57,7 @@ module Formatter
       end
 
       def self.blank?(phone_number)
-        phone_number.nil? || phone_number.strip.empty?
+        phone_number.nil? || phone_number.to_s.strip.empty?
       end
 
       def self.invalid_characters?(phone_number)
