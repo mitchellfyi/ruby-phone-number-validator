@@ -11,7 +11,7 @@ module Formatter
       def self.format(phone_number = nil)
         normalized_phone_number = normalize(phone_number)
         validate(normalized_phone_number)
-				
+
         "#{COUNTRY_CODE}#{normalized_phone_number}"
       end
 
@@ -26,13 +26,15 @@ module Formatter
       end
 
       def self.normalize(phone_number)
-        phone_number&.strip
-          &.gsub(WHITESPACE_REGEX, '')
-          &.gsub(PREFIX_REGEX, '')
+        return '' if phone_number.nil?
+        
+        phone_number.to_s.strip
+          .gsub(WHITESPACE_REGEX, '')
+          .gsub(PREFIX_REGEX, '')
       end
 
       def self.blank?(phone_number)
-        phone_number.nil? || phone_number == ''
+        phone_number.nil? || phone_number.strip.empty?
       end
 
       def self.invalid_characters?(phone_number)
@@ -46,7 +48,7 @@ module Formatter
 
     module Errors
       class Error < StandardError; end
-
+  
       class InvalidLengthError < Error; end
       class BlankError < Error; end
       class InvalidCharacters < Error; end
