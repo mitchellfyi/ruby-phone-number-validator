@@ -21,6 +21,11 @@ class PhoneNumberFormatterTest < Minitest::Test
     assert_equal '+447123456789', result
   end
 
+  def test_normalized_and_valid_integer
+    result = Formatter::PhoneNumber::UK.format(7890123456)
+    assert_equal '+447890123456', result
+  end
+
   def test_valid_prefixes
     result = Formatter::PhoneNumber::UK.format('01234567890')
     assert_equal '+441234567890', result
@@ -48,7 +53,7 @@ class PhoneNumberFormatterTest < Minitest::Test
     end
 
     assert_raises Formatter::PhoneNumber::Errors::InvalidLengthError do
-      puts Formatter::PhoneNumber::UK.format('012345678901')
+      Formatter::PhoneNumber::UK.format('012345678901')
     end
   end
 
@@ -56,7 +61,6 @@ class PhoneNumberFormatterTest < Minitest::Test
     assert_raises Formatter::PhoneNumber::Errors::BlankError do
       Formatter::PhoneNumber::UK.format
     end
-
 
     assert_raises Formatter::PhoneNumber::Errors::BlankError do
       Formatter::PhoneNumber::UK.format(nil)
