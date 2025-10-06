@@ -3,8 +3,8 @@
 A Ruby gem for formatting and validating UK phone numbers. Converts various input formats to international format (+44...).
 
 ## Demo
+[![]()](https://www.youtube.com/embed/JGVfaos3wQM?si=VDGdpGkx4Q3zA9AH)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JGVfaos3wQM?si=VDGdpGkx4Q3zA9AH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Features
 
